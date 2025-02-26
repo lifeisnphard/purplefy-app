@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+
+/wp-content
+!/wp-content/mu-plugins/bedrock-autoloader.php
+
+/vendor

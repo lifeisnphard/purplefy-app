@@ -1,0 +1,51 @@
+{
+  "name": "purplefy/purplefy-app",
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "cedaro/satispress": "^2.0",
+    "composer/installers": "^2.3",
+    "roots/bedrock-autoloader": "^1.0",
+    "roots/bedrock-disallow-indexing": "^2.0",
+    "wpackagist-theme/woostify": "^2.3"
+  },
+  "require-dev": {
+    "composer/composer": "^2.8.5",
+    "ergebnis/composer-normalize": "^2.45",
+    "roave/security-advisories": "dev-master",
+    "squizlabs/php_codesniffer": "^3.11.3",
+    "wp-cli/wp-cli-bundle": "^2.11",
+    "wpackagist-plugin/query-monitor": "^3.17"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "ergebnis/composer-normalize": true
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "installer-paths": {
+      "wp-content/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "wp-content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "wp-content/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    }
+  }
+}
