@@ -1,0 +1,39 @@
+services:
+  mariadb:
+    env_file:
+      - '.env'
+    image: bitnami/mariadb:latest
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'db_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+  
+  wordpress:
+    env_file:
+      - '.env'
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WP_IMAGE_TAG: ${WP_IMAGE_TAG}
+        WP_ENV: ${WP_ENV}
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    depends_on:
+      - mariadb
+    environment:
+      - WORDPRESS_DATABASE_HOST=mariadb
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - WORDPRESS_DATABASE_USER=${DB_USER}
+      - WORDPRESS_DATABASE_NAME=${DB_NAME}
+      - WORDPRESS_DATABASE_PASSWORD=${DB_PASSWORD}
+
+volumes:
+  db_data:
+    driver: local

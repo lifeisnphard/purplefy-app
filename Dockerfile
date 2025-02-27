@@ -1,24 +1,31 @@
+ARG WP_IMAGE_TAG
 FROM bitnami/wordpress-nginx:${WP_IMAGE_TAG}
 
-WORKDIR /bitnami/wordpress
+WORKDIR /opt/bitnami/wordpress
 
-COPY ./wp-content ./wp-content/
+RUN rm -rf ./wp-content
+COPY ./wp-content ./wp-content
 COPY ./composer.json ./composer.lock ./
 
 USER root
 
+ARG WP_ENV
 RUN if [ "$WP_ENV" = "production" ]; then \
         composer install --no-dev --optimize-autoloader; \
     else \
         composer install --optimize-autoloader; \
     fi
 
-RUN chown -R daemon:daemon .
+RUN chown -R daemon:daemon ./wp-content
 
-RUN rm -rf /opt/bitnami/wordpress/wp-content
+RUN sed -i -e 's/^listen.owner = root/listen.owner = daemon/' \
+           -e 's/^listen.group = root/listen.group = daemon/' \
+           /opt/bitnami/php/etc/php-fpm.d/www.conf
 
-RUN ln -s /bitnami/wordpress/wp-content /opt/bitnami/wordpress/wp-content
+WORKDIR /bitnami/wordpress
 
-RUN chown -R daemon:daemon /opt/bitnami/wordpress/wp-content
+EXPOSE 8080 8443
 
 USER daemon
+ENTRYPOINT [ "/opt/bitnami/scripts/wordpress/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]
