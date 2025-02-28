@@ -1,31 +1,37 @@
-ARG WP_IMAGE_TAG
-FROM bitnami/wordpress-nginx:${WP_IMAGE_TAG}
+ARG COMPOSER_TAG=latest
+ARG WP_BUILDER_TAG=latest-dev
+ARG WP_BASE_TAG=latest
 
-WORKDIR /opt/bitnami/wordpress
+FROM composer:${COMPOSER_TAG} AS composer
 
-RUN rm -rf ./wp-content
+WORKDIR /app
+
 COPY ./wp-content ./wp-content
 COPY ./composer.json ./composer.lock ./
 
-USER root
-
-ARG WP_ENV
-RUN if [ "$WP_ENV" = "production" ]; then \
+ARG WP_ENV=production
+RUN if [ "${WP_ENV}" = "production" ]; then \
         composer install --no-dev --optimize-autoloader; \
     else \
         composer install --optimize-autoloader; \
     fi
 
-RUN chown -R daemon:daemon ./wp-content
+COPY . .
 
-RUN sed -i -e 's/^listen.owner = root/listen.owner = daemon/' \
-           -e 's/^listen.group = root/listen.group = daemon/' \
-           /opt/bitnami/php/etc/php-fpm.d/www.conf
+ARG WP_BUILDER_TAG
+FROM cgr.dev/chainguard/wordpress:${WP_BUILDER_TAG} AS builder
 
-WORKDIR /bitnami/wordpress
+# Needs any environment variable with name starting with "WORDPRESS_" to trigger wp-config.php creation
+ENV WORDPRESS_CONFIG_CREATION=true
 
-EXPOSE 8080 8443
+WORKDIR /usr/src/wordpress
 
-USER daemon
-ENTRYPOINT [ "/opt/bitnami/scripts/wordpress/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]
+COPY --from=composer /app/wp-content ./wp-content
+#COPY --from=composer /app/vendor ./vendor
+
+RUN /usr/local/bin/docker-entrypoint.sh php-fpm --version
+
+ARG WP_BASE_TAG
+FROM cgr.dev/chainguard/wordpress:${WP_BASE_TAG} AS final
+
+COPY --from=builder --chown=php:php /var/www/html /var/www/html
