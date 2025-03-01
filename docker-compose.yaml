@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/lifeisnphard/purplefy-app:latest
+    image: ghcr.io/lifeisnphard/purplefy-app:purplewear
     build:
       context: .
       dockerfile: Dockerfile
