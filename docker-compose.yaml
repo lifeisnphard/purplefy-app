@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        COMPOSER_TAG: ${COMPOSER_TAG:-latest}
+        PHP_DEV_TAG: ${PHP_DEV_TAG:-latest-dev}
         WP_BUILDER_TAG: ${WP_BUILDER_TAG:-latest-dev}
         WP_BASE_TAG: ${WP_BASE_TAG:-latest}
         WP_ENV: ${WP_ENV:-development}

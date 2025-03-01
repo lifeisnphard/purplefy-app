@@ -1,16 +1,20 @@
-ARG COMPOSER_TAG=latest
+ARG PHP_DEV_TAG=latest-dev
 ARG WP_BUILDER_TAG=latest-dev
 ARG WP_BASE_TAG=latest
 
-FROM composer:${COMPOSER_TAG} AS initial
+FROM cgr.dev/chainguard/php:${PHP_DEV_TAG} AS initial
 
-WORKDIR /app
+USER root
 
-COPY ./wp-content ./wp-content
-COPY ./composer.json ./composer.lock ./
+COPY ./wp-content /app/wp-content
+COPY ./composer.json ./composer.lock /app/
+
+RUN chown -R php:php /app
+
+USER php
 
 ARG WP_ENV=production
-RUN if [ "${WP_ENV}" = "production" ]; then \
+RUN cd /app && if [ "${WP_ENV}" = "production" ]; then \
         composer install --no-dev --no-progress --optimize-autoloader --prefer-dist; \
     else \
         composer install --no-progress --optimize-autoloader --prefer-dist; \
@@ -27,8 +31,9 @@ USER root
 RUN apk update && apk add imagemagick=~7.1.1.40
 
 RUN rm -rf /usr/src/wordpress/wp-content
-COPY --from=initial --chown=php:php /app/wp-content /usr/src/wordpress/wp-content
+#COPY --from=initial --chown=php:php /app/wp-content /usr/src/wordpress/wp-content
 #COPY --from=initial --chown=php:php /app/vendor /usr/src/wordpress/vendor
+COPY --from=initial --chown=php:php /app /usr/src/wordpress
 
 USER php
 
