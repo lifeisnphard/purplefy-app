@@ -28,8 +28,6 @@ USER root
 RUN apk update && apk add imagemagick=~7.1.1.40
 
 RUN rm -rf /usr/src/wordpress/wp-content
-#COPY --from=initial --chown=php:php /app/wp-content /usr/src/wordpress/wp-content
-#COPY --from=initial --chown=php:php /app/vendor /usr/src/wordpress/vendor
 COPY --from=initial --chown=php:php /app /usr/src/wordpress
 
 USER php
@@ -38,8 +36,5 @@ RUN /usr/local/bin/docker-entrypoint.sh php-fpm --version
 
 FROM cgr.dev/chainguard/wordpress:latest@sha256:bc5834a1ede1a25624537e57baf9af5814188882c6abbc0a4b5f8521888f9533 \
 	AS final
-
-LABEL org.opencontainers.image.source=https://github.com/lifeisnphard/purplefy-app
-LABEL org.opencontainers.image.licenses=MIT
 
 COPY --from=builder --chown=php:php /var/www/html /var/www/html
