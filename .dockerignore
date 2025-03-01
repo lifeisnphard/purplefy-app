@@ -1,0 +1,15 @@
+/.docker
+/vendor
+
+.env.*
+
+**/.dockerignore
+**/.editorconfig
+**/.gitignore
+
+docker-compose.yaml
+Dockerfile
+
+/.github
+LICENSE
+README.md
