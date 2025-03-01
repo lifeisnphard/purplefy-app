@@ -1,24 +1,40 @@
-FROM bitnami/wordpress-nginx:${WP_IMAGE_TAG}
+ARG COMPOSER_TAG=latest
+ARG WP_BUILDER_TAG=latest-dev
+ARG WP_BASE_TAG=latest
 
-WORKDIR /bitnami/wordpress
+FROM composer:${COMPOSER_TAG} AS initial
 
-COPY ./wp-content ./wp-content/
+WORKDIR /app
+
+COPY ./wp-content ./wp-content
 COPY ./composer.json ./composer.lock ./
+
+ARG WP_ENV=production
+RUN if [ "${WP_ENV}" = "production" ]; then \
+        composer install --no-dev --no-progress --optimize-autoloader --prefer-dist; \
+    else \
+        composer install --no-progress --optimize-autoloader --prefer-dist; \
+    fi
+
+ARG WP_BUILDER_TAG
+FROM cgr.dev/chainguard/wordpress:${WP_BUILDER_TAG} AS builder
+
+# Needs any environment variable with name starting with "WORDPRESS_" to trigger wp-config.php creation
+ENV WORDPRESS_CONFIG_CREATION=true
 
 USER root
 
-RUN if [ "$WP_ENV" = "production" ]; then \
-        composer install --no-dev --optimize-autoloader; \
-    else \
-        composer install --optimize-autoloader; \
-    fi
+RUN apk update && apk add imagemagick=~7.1.1.40
 
-RUN chown -R daemon:daemon .
+RUN rm -rf /usr/src/wordpress/wp-content
+COPY --from=initial --chown=php:php /app/wp-content /usr/src/wordpress/wp-content
+#COPY --from=initial --chown=php:php /app/vendor /usr/src/wordpress/vendor
 
-RUN rm -rf /opt/bitnami/wordpress/wp-content
+USER php
 
-RUN ln -s /bitnami/wordpress/wp-content /opt/bitnami/wordpress/wp-content
+RUN /usr/local/bin/docker-entrypoint.sh php-fpm --version
 
-RUN chown -R daemon:daemon /opt/bitnami/wordpress/wp-content
+ARG WP_BASE_TAG
+FROM cgr.dev/chainguard/wordpress:${WP_BASE_TAG} AS final
 
-USER daemon
+COPY --from=builder --chown=php:php /var/www/html /var/www/html
