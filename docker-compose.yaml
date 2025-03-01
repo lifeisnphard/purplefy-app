@@ -1,6 +1,6 @@
 services:
   app:
-    image: purplefy-local-wp
+    image: ghcr.io/lifeisnphard/purplefy-app:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -21,7 +21,7 @@ services:
       - 'document-root:/var/www/html'
 
   nginx:
-    image: cgr.dev/chainguard/nginx
+    image: cgr.dev/chainguard/nginx:latest
     restart: 'no'
     ports:
       - '8080:8080'
@@ -30,7 +30,7 @@ services:
       - './nginx.conf:/etc/nginx/nginx.conf'
 
   mariadb:
-    image: cgr.dev/chainguard/mariadb
+    image: cgr.dev/chainguard/mariadb:latest
     restart: 'no'
     environment:
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
