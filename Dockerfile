@@ -3,8 +3,7 @@ FROM cgr.dev/chainguard/php:latest-dev@sha256:3d41619837d757d8df4e8554a49395de8a
 
 USER root
 
-COPY ./wp-content /app/wp-content
-COPY ./composer.json ./composer.lock /app/
+COPY . /app
 
 RUN chown -R php:php /app
 
