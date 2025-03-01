@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14fdb18724591a7f01835002086afa0e",
+    "content-hash": "725936e3a85eda08e40f72fc659194d6",
     "packages": [
         {
             "name": "cedaro/satispress",
@@ -513,6 +513,47 @@
                 "source": "https://github.com/php-fig/log/tree/2.0.0"
             },
             "time": "2021-07-14T16:41:46+00:00"
+        },
+        {
+            "name": "purplefy/woostify-child",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://purplewear.com.br/satispress/woostify-child/1.0.0",
+                "shasum": "d125f1557f981deb52df2d0ec8c0f0ceeafca041"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-theme",
+            "authors": [
+                {
+                    "name": "Carlos Vinicius Ferreira",
+                    "homepage": ""
+                }
+            ],
+            "description": "PurpleWear.com.br first theme... based on Woostify"
+        },
+        {
+            "name": "purplefy/woostify-pro",
+            "version": "1.7.8",
+            "dist": {
+                "type": "zip",
+                "url": "https://purplewear.com.br/satispress/woostify-pro/1.7.8",
+                "shasum": "72bdb5fa056f85f00b4b78350e55333608b846b8"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Woostify",
+                    "homepage": "https://woostify.com/about/"
+                }
+            ],
+            "description": "This plugin is a modules for the Woostify WordPress Theme.",
+            "homepage": "https://woostify.com/"
         },
         {
             "name": "roots/bedrock-autoloader",
