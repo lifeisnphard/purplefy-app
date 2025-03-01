@@ -27,7 +27,7 @@ services:
       - '8080:8080'
     volumes:
       - 'document-root:/var/www/html'
-      - './nginx.conf:/etc/nginx/nginx.conf'
+      - './.docker/nginx.conf:/etc/nginx/nginx.conf'
 
   mariadb:
     image: cgr.dev/chainguard/mariadb:latest
