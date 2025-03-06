@@ -1,5 +1,8 @@
-/.docker
-/vendor
+.idea/
+.vscode/
+
+.docker/
+vendor/
 
 .env.*
 
@@ -10,6 +13,12 @@
 docker-compose.yaml
 Dockerfile
 
-/.github
+.github/
 LICENSE
 README.md
+
+.flox/
+.devbox/
+devbox.d/
+devbox.json
+devbox.lock

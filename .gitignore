@@ -2,9 +2,15 @@
 .env.*
 !.env.example
 
-/wp-content
-!/wp-content/mu-plugins/bedrock-autoloader.php
+wp-content/
+!wp-content/mu-plugins/bedrock-autoloader.php
 
-/vendor
+vendor/
 
 auth.json
+
+.flox/
+.devbox/
+devbox.d/
+devbox.json
+devbox.lock
