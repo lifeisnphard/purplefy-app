@@ -6,6 +6,8 @@
     "php": ">=8.1",
     "cedaro/satispress": "^2.0",
     "composer/installers": "^2.3",
+    "purplefy/woostify-child": "1.0.0",
+    "purplefy/woostify-pro": "1.7.8",
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
     "wpackagist-theme/woostify": "^2.3"
@@ -17,12 +19,16 @@
     "wp-cli/wp-cli-bundle": "^2.11",
     "wpackagist-plugin/query-monitor": "^3.17"
   },
-  "repositories": [
-    {
+  "repositories": {
+    "purplefy": {
+      "type": "composer",
+      "url": "https://purplewear.com.br/satispress/"
+    },
+    "wpackagist": {
       "type": "composer",
       "url": "https://wpackagist.org"
     }
-  ],
+  },
   "minimum-stability": "stable",
   "prefer-stable": true,
   "config": {
