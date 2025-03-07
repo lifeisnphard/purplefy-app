@@ -1,4 +1,12 @@
 version: 2
+
+registries:
+  purplefy:
+    type: composer
+    url: https://purplewear.com.br/satispress/
+    username: ${{ secrets.PURPLEFY_COMPOSER_USERNAME }}
+    password: ${{ secrets.PURPLEFY_COMPOSER_PASSWORD }}
+
 updates:
   - package-ecosystem: "composer"
     directory: "/"
