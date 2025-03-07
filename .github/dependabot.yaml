@@ -2,15 +2,19 @@ version: 2
 updates:
   - package-ecosystem: "composer"
     directory: "/"
+    registries: "*"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[DEPENDABOT][Composer]"
+      prefix-development: "[DEPENDABOT][Composer][Dev]"
   
   - package-ecosystem: "docker"
     directory: "/"
+    registries: "*"
     schedule:
       interval: "daily"
-
-  - package-ecosystem: "docker-compose"
-    directory: "/"
-    schedule:
-      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[DEPENDABOT][Docker]"
