@@ -1,4 +1,4 @@
-FROM cgr.dev/chainguard/php:latest-dev@sha256:3d41619837d757d8df4e8554a49395de8aab9ff6e21a9088270d0de0c887812e \
+FROM cgr.dev/chainguard/php:latest-dev@sha256:63b69c7b44ae04d27467905c581dc11abf52b7fa0407882688135b312c1ba947 \
 	AS initial
 
 USER root
