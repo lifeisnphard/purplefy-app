@@ -13,6 +13,7 @@ updates:
     registries: "*"
     schedule:
       interval: "daily"
+    target-branch: "project/purplewear"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "[DEPENDABOT][Composer]"
@@ -23,6 +24,7 @@ updates:
     registries: "*"
     schedule:
       interval: "daily"
+    target-branch: "project/purplewear"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "[DEPENDABOT][Docker]"
