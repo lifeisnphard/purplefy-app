@@ -3,6 +3,8 @@ FROM cgr.dev/chainguard/php:latest-dev@sha256:3d41619837d757d8df4e8554a49395de8a
 
 USER root
 
+RUN apk update && apk add subversion
+
 COPY . /app
 
 RUN chown -R php:php /app

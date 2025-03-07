@@ -18,6 +18,8 @@ Dockerfile
 LICENSE
 README.md
 
+scripts/
+
 .flox/
 .devbox/
 devbox.d/
