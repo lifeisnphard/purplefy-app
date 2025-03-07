@@ -1,15 +1,16 @@
 .idea/
 .vscode/
 
-.docker/
-vendor/
+wp-content/vendor/
 
 .env.*
+auth.example.json
 
 **/.dockerignore
 **/.editorconfig
 **/.gitignore
 
+.docker/
 docker-compose.yaml
 Dockerfile
 

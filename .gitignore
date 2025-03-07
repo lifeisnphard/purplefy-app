@@ -5,8 +5,6 @@
 wp-content/
 !wp-content/mu-plugins/bedrock-autoloader.php
 
-vendor/
-
 auth.json
 
 .flox/
