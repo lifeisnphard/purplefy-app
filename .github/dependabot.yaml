@@ -2,8 +2,8 @@ version: 2
 
 registries:
   purplefy:
-    type: composer
-    url: https://purplewear.com.br/satispress/
+    type: "composer-repository"
+    url: "https://purplewear.com.br/satispress/"
     username: ${{ secrets.PURPLEFY_COMPOSER_USERNAME }}
     password: ${{ secrets.PURPLEFY_COMPOSER_PASSWORD }}
 
@@ -17,7 +17,7 @@ updates:
     commit-message:
       prefix: "[DEPENDABOT][Composer]"
       prefix-development: "[DEPENDABOT][Composer][Dev]"
-  
+
   - package-ecosystem: "docker"
     directory: "/"
     registries: "*"
