@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea63521c2c10ffba2010c561bd78c9f4",
+    "content-hash": "725936e3a85eda08e40f72fc659194d6",
     "packages": [
         {
             "name": "cedaro/satispress",
