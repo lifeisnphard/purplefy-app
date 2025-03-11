@@ -1,16 +1,8 @@
-.env
-.env.*
-!.env.example
+**/.env
+**/.env.*
+!**/.env.example
 
-wp-content/
-!wp-content/mu-plugins/bedrock-autoloader.php
-
-auth.json
+services/wordpress/wp-content/
+!services/wordpress/wp-content/mu-plugins/bedrock-autoloader.php
 
 scripts/
-
-.flox/
-.devbox/
-devbox.d/
-devbox.json
-devbox.lock

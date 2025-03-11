@@ -1,14 +1,10 @@
 services:
   wp:
-    image: ghcr.io/lifeisnphard/purplefy-app:latest-wp
     build:
-      context: .
+      context: ./services/wordpress
       dockerfile: Dockerfile
-      args:
-        WP_ENV: ${WP_ENV:-development}
-    restart: 'no'
     environment:
-      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_HOST: ${DB_HOST}
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_NAME}
@@ -19,27 +15,11 @@ services:
         define( 'AUTOMATIC_UPDATER_DISABLED', true );
     volumes:
       - 'document-root:/var/www/html'
-    depends_on:
-      - mariadb
-  
-  nginx:
-    image: ghcr.io/lifeisnphard/purplefy-app:latest-nginx
-    build:
-      context: ./docker/nginx
-      dockerfile: Dockerfile
-    restart: 'no'
-    ports:
-      - '8080:8080'
-    volumes:
-      - 'document-root:/var/www/html'
-      - './docker/nginx/nginx.conf:/etc/nginx/nginx.conf'
-    depends_on:
-      - wp
 
   mariadb:
     image: ghcr.io/lifeisnphard/purplefy-app:latest-db
     build:
-      context: ./docker/db
+      context: ./services/db
       dockerfile: Dockerfile
     restart: 'no'
     environment:

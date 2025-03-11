@@ -2,7 +2,8 @@ version: 2
 
 updates:
   - package-ecosystem: "composer"
-    directory: "/"
+    directory:
+      - "/services/*"
     registries: "*"
     schedule:
       interval: "daily"
@@ -13,8 +14,7 @@ updates:
 
   - package-ecosystem: "docker"
     directories:
-      - "/"
-      - "/docker/*"
+      - "/services/*"
     registries: "*"
     schedule:
       interval: "daily"

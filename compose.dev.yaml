@@ -1,0 +1,13 @@
+services:
+  wp:
+    env_file: .env.dev
+    image: ghcr.io/lifeisnphard/purplefy-app:latest-wp-dev
+    build:
+      target: wp-dev
+      args:
+        COMPOSER_ENV: dev
+    restart: 'no'
+    ports:
+      - '8080:8080'
+    entrypoint: []
+    command: /var/www/html/wp-content/vendor/bin/wp server --host=0.0.0.0 --port=8080

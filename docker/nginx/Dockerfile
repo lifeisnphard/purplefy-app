@@ -1,1 +1,0 @@
-FROM cgr.dev/chainguard/nginx:latest@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42
