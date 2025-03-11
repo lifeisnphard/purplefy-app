@@ -1,0 +1,1 @@
+FROM cgr.dev/chainguard/mariadb:latest@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38

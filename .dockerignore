@@ -10,7 +10,7 @@ auth.example.json
 **/.editorconfig
 **/.gitignore
 
-.docker/
+docker/
 docker-compose.yaml
 Dockerfile
 

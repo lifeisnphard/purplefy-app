@@ -9,7 +9,7 @@ registries:
 
 updates:
   - package-ecosystem: "composer"
-    directory: "/"
+    directory: "*"
     registries: "*"
     schedule:
       interval: "daily"
@@ -19,7 +19,7 @@ updates:
       prefix-development: "[DEPENDABOT][Composer][Dev]"
 
   - package-ecosystem: "docker"
-    directory: "/"
+    directories: "*"
     registries: "*"
     schedule:
       interval: "daily"
