@@ -12,7 +12,9 @@ updates:
       prefix-development: "[DEPENDABOT][Composer][Dev]"
 
   - package-ecosystem: "docker"
-    directories: "*"
+    directories:
+      - "/"
+      - "/docker/*"
     registries: "*"
     schedule:
       interval: "daily"
