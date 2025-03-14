@@ -1,5 +1,8 @@
 services:
   wp:
+    build:
+      context: './services/wordpress'
+      dockerfile: 'Dockerfile'
     environment:
       WORDPRESS_DB_HOST: ${DB_HOST}
       WORDPRESS_DB_USER: ${DB_USER}
@@ -10,15 +13,15 @@ services:
         define( 'DISALLOW_FILE_MODS', true );
         # Disable automatic updates
         define( 'AUTOMATIC_UPDATER_DISABLED', true );
+    restart: 'always'
     volumes:
       - 'document-root:/var/www/html'
     depends_on:
       - mariadb
 
   nginx:
-    build:
-      context: ./services/nginx
-      dockerfile: Dockerfile
+    image: cgr.dev/chainguard/nginx:latest@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42
+    restart: 'always'
     ports:
       - '8080:8080'
     volumes:
@@ -28,13 +31,13 @@ services:
       - wp
 
   mariadb:
-    build:
-      context: ./services/db
-      dockerfile: Dockerfile
+    image: cgr.dev/chainguard/mariadb:latest@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
     environment:
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASSWORD}
       MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    restart: 'always'
     ports:
       - '3306:3306'
     volumes:
