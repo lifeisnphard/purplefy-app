@@ -1,4 +1,4 @@
-FROM cgr.dev/chainguard/nginx:latest-dev@sha256:f687438339faa9afcf1ac3e97f2ea37001e6f534e556d550a67879a262aa6088 \
+FROM cgr.dev/chainguard/nginx:latest-dev@sha256:471f6dd17a101535fef4cf78d2ceb27ec9de8e802d72f27ec5df31f8ed6a0622 \
 	AS dev
-FROM cgr.dev/chainguard/nginx:latest@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42 \
+FROM cgr.dev/chainguard/nginx:latest@sha256:38eb90af3a880d4fa27952079956f13214fde61a38307ea6812fc6fd37f3cfbb \
 	AS prod
