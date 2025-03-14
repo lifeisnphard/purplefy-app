@@ -1,0 +1,6 @@
+wp-content/vendor/
+
+**/.env.*
+
+**/.dockerignore
+Dockerfile
