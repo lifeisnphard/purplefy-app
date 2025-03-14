@@ -17,12 +17,16 @@ variable "SERVICES" {
       environments = [
         {
           target = "dev"
-          composer_additional_args = ""
+          args = {
+            COMPOSER_ADDITIONAL_ARGS = ""
+          }
           tag_suffix = "wp-dev"
         },
         {
           target = "prod"
-          composer_additional_args = "--no-dev"
+          args = {
+            COMPOSER_ADDITIONAL_ARGS = "--no-dev"
+          }
           tag_suffix = "wp"
         }
       ]
@@ -43,8 +47,17 @@ target "wp" {
 
   context = "./services/wordpress"
   dockerfile = "Dockerfile"
-  args = {
-    COMPOSER_ADDITIONAL_ARGS = environment.composer_additional_args
+  target = environment.target
+  args = environment.args
+  platforms = [
+    "linux/amd64",
+    "linux/arm64"
+  ]
+  labels = {
+    "org.opencontainers.image.source" = "https://github.com/lifeisnphard/purplefy-app"
+    "org.opencontainers.image.description" = "Highly optimized WordPress image wiht Composer for dependency management"
+    "org.opencontainers.image.author" = "carlos@viniciusferreira.com"
+    "org.opencontainers.image.licenses" = "MIT"
   }
   tags = generate_tags(SERVICES.wordpress.versions, environment.tag_suffix)
 }
