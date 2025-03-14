@@ -47,6 +47,11 @@ target "wp" {
     COMPOSER_ADDITIONAL_ARGS = environment.composer_additional_args
   }
   tags = generate_tags(SERVICES.wordpress.versions, environment.tag_suffix)
+  labels = {
+    "org.opencontainers.image.source" = "https://github.com/lifeisnphard/purplefy-app"
+    "org.opencontainers.image.author" = "carlos@viniciusferreira.com"
+    "org.opencontainers.image.licenses" = "MIT"
+  }
 }
 
 group "default" {
