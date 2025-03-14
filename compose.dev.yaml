@@ -1,13 +1,22 @@
 services:
   wp:
-    env_file: .env.dev
     image: ghcr.io/lifeisnphard/purplefy-app:latest-wp-dev
-    build:
-      target: wp-dev
-      args:
-        COMPOSER_ENV: dev
+    env_file: .env.dev
     restart: 'no'
     ports:
-      - '8080:8080'
+      - '8081:8081'
     entrypoint: []
-    command: /var/www/html/wp-content/vendor/bin/wp server --host=0.0.0.0 --port=8080
+    command: /var/www/html/wp-content/vendor/bin/wp server --host=0.0.0.0 --port=8081
+
+  nginx:
+    build:
+      target: dev
+    restart: 'no'
+
+  mariadb:
+    build:
+      target: dev
+    env_file: .env.dev
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+    restart: 'no'
