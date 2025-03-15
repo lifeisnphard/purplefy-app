@@ -1,8 +1,8 @@
 services:
   wp:
-    build:
-      context: './services/wordpress'
-      dockerfile: 'Dockerfile'
+    image: ghcr.io/lifeisnphard/purplefy-app:latest-wp-dev
+    env_file:
+      - .env.dev
     environment:
       WORDPRESS_DB_HOST: ${DB_HOST}
       WORDPRESS_DB_USER: ${DB_USER}
@@ -13,15 +13,17 @@ services:
         define( 'DISALLOW_FILE_MODS', true );
         # Disable automatic updates
         define( 'AUTOMATIC_UPDATER_DISABLED', true );
-    restart: 'always'
+    restart: 'no'
     volumes:
       - 'document-root:/var/www/html'
     depends_on:
       - mariadb
 
   nginx:
-    image: cgr.dev/chainguard/nginx:latest@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42
-    restart: 'always'
+    image: cgr.dev/chainguard/nginx:latest-dev@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42
+    env_file:
+      - .env.dev
+    restart: 'no'
     ports:
       - '8080:8080'
     volumes:
@@ -31,13 +33,15 @@ services:
       - wp
 
   mariadb:
-    image: cgr.dev/chainguard/mariadb:latest@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
+    image: cgr.dev/chainguard/mariadb:latest-dev@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
+    env_file:
+      - .env.dev
     environment:
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASSWORD}
       MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-    restart: 'always'
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+    restart: 'no'
     ports:
       - '3306:3306'
     volumes:
@@ -45,6 +49,8 @@ services:
 
 volumes:
   document-root:
+    name: purplefy-app-dev-document-root
     driver: local
   db-data:
+    name: purplefy-app-dev-db-data
     driver: local

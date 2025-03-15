@@ -5,7 +5,7 @@
 **/.env.*
 !**/.env.example
 
-services/wordpress/wp-content/
-!services/wordpress/wp-content/mu-plugins/bedrock-autoloader.php
+wp-content/
+!wp-content/mu-plugins/bedrock-autoloader.php
 
 scripts/
