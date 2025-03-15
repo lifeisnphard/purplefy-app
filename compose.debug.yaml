@@ -23,7 +23,7 @@ services:
     command: /var/www/html/wp-content/vendor/bin/wp server --host=0.0.0.0 --port=8080
 
   mariadb:
-    image: cgr.dev/chainguard/mariadb:latest-dev@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
+    image: cgr.dev/chainguard/mariadb:latest-dev@sha256:fd2228f470363e428ba70b1c32ba464a3292ddb96797782e973b4b02aad6b7aa
     env_file:
       - .env.dev
     environment:

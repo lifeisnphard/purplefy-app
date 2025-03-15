@@ -29,7 +29,7 @@ services:
       - wp
 
   mariadb:
-    image: cgr.dev/chainguard/mariadb:latest@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
+    image: cgr.dev/chainguard/mariadb:latest@sha256:14f42a3784a6e03e29f0865a3a014b12977f587578e724cd5755e1df577c7d1a
     environment:
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASSWORD}
