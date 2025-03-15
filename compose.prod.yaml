@@ -1,0 +1,50 @@
+services:
+  wp:
+    image: ghcr.io/lifeisnphard/purplefy-app:latest-wp
+    environment:
+      WORDPRESS_DB_HOST: ${DB_HOST}
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_CONFIG_EXTRA: |
+        # Disable plugin and theme update and installation
+        define( 'DISALLOW_FILE_MODS', true );
+        # Disable automatic updates
+        define( 'AUTOMATIC_UPDATER_DISABLED', true );
+    restart: 'always'
+    volumes:
+      - 'document-root:/var/www/html'
+    depends_on:
+      - mariadb
+
+  nginx:
+    image: cgr.dev/chainguard/nginx:latest@sha256:f7e4ebba5c4eaa31da5cc01d31ef243fdead6055c1f3b8c5e6d0f85e33aa4f42
+    restart: 'always'
+    ports:
+      - '8080:8080'
+    volumes:
+      - 'document-root:/var/www/html'
+      - './services/nginx/nginx.conf:/etc/nginx/nginx.conf'
+    depends_on:
+      - wp
+
+  mariadb:
+    image: cgr.dev/chainguard/mariadb:latest@sha256:62523e6bc97843d1e384251644e54247e84c866064e8ac99e4fe1781c8775a38
+    environment:
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_RANDOM_ROOT_PASSWORD: 'yes'
+    restart: 'always'
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'db-data:/var/lib/mysql'
+
+volumes:
+  document-root:
+    name: purplefy-app-prod-document-root
+    driver: local
+  db-data:
+    name: purplefy-app-prod-db-data
+    driver: local
