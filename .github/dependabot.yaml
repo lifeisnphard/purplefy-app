@@ -21,3 +21,12 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "[DEPENDABOT][Docker]"
+
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    registries: "*"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[DEPENDABOT][Docker Compose]"
