@@ -12,6 +12,6 @@ services:
     restart: 'no'
 
   mariadb:
-    image: cgr.dev/chainguard/mariadb:latest-dev@sha256:1a35eb9fed9a5dc7cd7dcf43ff1237fc6051115b2c72c181fa1e02536590e903
+    image: cgr.dev/chainguard/mariadb:latest-dev@sha256:fd2228f470363e428ba70b1c32ba464a3292ddb96797782e973b4b02aad6b7aa
     env_file: .env.dev
     restart: 'no'
