@@ -30,7 +30,7 @@ function "generate_tags" {
 
 target "wp-base" {
   context = "."
-  dockerfile = "services/wordpress/Dockerfile"
+  dockerfile = "docker/wordpress/Dockerfile"
   labels = OCI_LABELS
 }
 
