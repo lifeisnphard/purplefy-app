@@ -6,7 +6,7 @@
 
 scripts/
 
-services/
+docker/
 
 wp-content/vendor/
 
