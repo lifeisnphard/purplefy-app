@@ -4,7 +4,7 @@
 .idea/
 .vscode/
 
-scripts/
+local-scripts/
 
 docker/
 

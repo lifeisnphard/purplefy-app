@@ -54,9 +54,13 @@ target "debug" {
 }
 
 group "default" {
-  targets = ["development", "production"]
+  targets = ["production"]
+}
+
+group "local" {
+  targets = ["debug", "development"]
 }
 
 group "all" {
-  targets = ["default", "debug"]
+  targets = ["debug", "development", "production"]
 }
