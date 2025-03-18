@@ -8,4 +8,4 @@
 wp-content/
 !wp-content/mu-plugins/bedrock-autoloader.php
 
-scripts/
+local-scripts/
