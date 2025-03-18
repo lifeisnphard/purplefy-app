@@ -44,13 +44,13 @@ target "production" {
   inherits = ["wp-base"]
   target = "wp-prod"
   tags = generate_tags(VERSIONS, "wp")
+  platforms = ["linux/amd64", "linux/arm64"]
 }
 
 target "debug" {
   inherits = ["wp-base"]
   target = "wp-debug"
   tags = generate_tags(VERSIONS, "wp-debug")
-  platforms = ["linux/amd64", "linux/arm64"]
 }
 
 group "default" {
